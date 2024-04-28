@@ -11,7 +11,7 @@ detection = cv2.CascadeClassifier(r"C:\Users\L\OneDrive\Desktop\FaceRecognition\
 recognizer = cv2.face.LBPHFaceRecognizer_create()
 recognizer.read(r"C:\Users\L\OneDrive\Desktop\FaceRecognition\Trainer.yml")
 
-names = ["", "Ishan Bhattacharya", "Shivangi Basu", "Tamanna Mandal", "Nabanita Bhattacharya", "Krishanu Bhattacharya"]
+names = [""]
 
 with open("names.txt", "r") as file:
     for name in file.readlines():
