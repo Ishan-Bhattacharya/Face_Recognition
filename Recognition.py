@@ -6,10 +6,10 @@ class MyVideoCapture(cv2.VideoCapture):
     def __exit__(self, *args):
         self.release()
 
-detection = cv2.CascadeClassifier(r"C:\Users\L\OneDrive\Desktop\Face_Recognition\data\haarcascade_face.xml")
+detection = cv2.CascadeClassifier(r"C:\Users\L\OneDrive\Desktop\FaceRecognition\data\haarcascade_face.xml")
 
 recognizer = cv2.face.LBPHFaceRecognizer_create()
-recognizer.read(r"C:\Users\L\OneDrive\Desktop\Face_Recognition\Trainer.yml")
+recognizer.read(r"C:\Users\L\OneDrive\Desktop\FaceRecognition\Trainer.yml")
 
 names = ["", "Ishan Bhattacharya", "Shivangi Basu", "Tamanna Mandal", "Nabanita Bhattacharya", "Krishanu Bhattacharya"]
 
