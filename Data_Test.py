@@ -4,7 +4,7 @@ from PIL import Image
 import os
 
 recognizer = cv2.face.LBPHFaceRecognizer_create()
-dataset_path = r"C:\Users\L\OneDrive\Desktop\FaceRecognition\data\dataset"
+dataset_path = r"dataset"
 
 def load_images(path):
     imgPath = [os.path.join(path, f) for f in os.listdir(path)]
