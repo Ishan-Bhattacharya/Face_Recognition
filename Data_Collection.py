@@ -10,15 +10,15 @@ class MyVideoCapture(cv2.VideoCapture):
 
 class Dataset:
     def exists(self):
-        if os.path.exists(r"C:\Users\L\OneDrive\Desktop\FaceRecognition\data\dataset"):
+        if os.path.exists(r"dataset"):
             pass
         else:
-            os.mkdir(r"C:\Users\L\OneDrive\Desktop\FaceRecognition\data\dataset")
+            os.mkdir(r"dataset")
 
 def main():
     check = Dataset()
     check.exists()
-    haar_cascade = cv2.CascadeClassifier(r'''C:\Users\L\OneDrive\Desktop\FaceRecognition\data\haarcascade_face.xml''')
+    haar_cascade = cv2.CascadeClassifier(r'''haarcascade_face.xml''')
 
     index = 0
 
@@ -37,7 +37,7 @@ def main():
             detect = haar_cascade.detectMultiScale(gray, 1.1, 6)
 
             for (x,y,w,h) in detect:
-                file_path = r'C:\Users\L\OneDrive\Desktop\FaceRecognition\data\dataset\Users.' + str(serial) + "." + str(index) + ".jpg"
+                file_path = r'dataset\Users.' + str(serial) + "." + str(index) + ".jpg"
                 print("Saving image to:", file_path)
                 cv2.imwrite(file_path, gray[y:y+h, x:x+w])
                 index += 1
