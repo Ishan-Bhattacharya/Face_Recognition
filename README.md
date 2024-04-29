@@ -4,3 +4,4 @@ After the dataset training is complete, Recognition.py can be executed. Serial n
 in single digit integers as they represent list index. While executing Recognition.py if IndexError
 is shown, before showing the list element in the window just reduce the serial value by 1
 (new_serial = serial - 1) and the find the elements with the new_serial (names[new_serial]).
+If Error is still given just change the location of the files in "" to be the complete address where they re stored.
