@@ -15,19 +15,40 @@ class Dataset:
         else:
             os.mkdir(r"dataset")
 
+    def get_next_serial(self, dataset_name):
+        serial_file = "serial.txt"
+        if os.path.exists(serial_file):
+            with open(serial_file, "r") as file:
+                serial_data = file.read().strip().splitlines()
+                serial = {name: int(value) for name, value in (line.split(':') for line in serial_data)}
+        else:
+            serial = {}
+        if dataset_name not in serial:
+            if serial:
+                next_serial = max(serial.values()) + 1
+            else:
+                next_serial = 1
+            serial[dataset_name] = next_serial
+            with open(serial_file, "w") as file:
+                file.writelines([f"{name}:{value}\n" for name, value in serial.items()])
+            return next_serial
+        else:
+            return serial[dataset_name]
+
 def main():
     check = Dataset()
     check.exists()
     haar_cascade = cv2.CascadeClassifier(r'''haarcascade_face.xml''')
 
     index = 0
-
-    serial = input("Enter serial number: ")
     
     codenames = input("Enter name: ")
 
-    with open("names.txt", "a") as file:
-         file.write(codenames + "\n")
+    with open("names.txt", "a+") as file:
+        file.seek(0)
+        names = file.read().splitlines()
+        if codenames not in names:
+            file.write(codenames + "\n")
 
     with MyVideoCapture(0) as stream:
         while True:
@@ -38,6 +59,7 @@ def main():
 
             for (x,y,w,h) in detect:
                 file_path = r'dataset\Users.' + str(serial) + "." + str(index) + ".jpg"
+                serial = check.get_next_serial(codenames)
                 print("Saving image to:", file_path)
                 cv2.imwrite(file_path, gray[y:y+h, x:x+w])
                 index += 1
